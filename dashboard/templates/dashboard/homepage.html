@@ -1,0 +1,34 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block main_section%}
+    <div>
+        <img class="mb-3" src="{% static 'dashboard/splash.png'%}" width="100%" alt="">
+        <h2 style="text-align: center;">Welcome to Recoup!</h2>
+        <p>The simple aim of this application is to offer users a way to get medical advice without having to check into a hospital or sports clinic. </p>
+        <p>Have access to a health proffessional in minutes with the paid plan or keep it free and access the vast information in the knowledge base. There you will find a lifetimes worth of information on various injuries and how they can be treated but best of all their causes and how to avoid them. All approved by certified proffesionals of course.</p>
+    </div>
+
+    <div>
+        <h2>What does it cost?</h2>
+        <p>That's all depends on what you need. If you want to work with a specific practice and have them coach you, feel free to visit their page and see what their costs are.</p>
+        <p>Don't be discouraged however, there is a free plan that gives you access to custom training or recovery plans depending on what you want to acheive. There is also access to the knowledge base to read up on information for yourself.</p>
+    </div>
+    <div>
+        <h2>Which are the participating medical practices</h2>
+        <p>Practices for all over the world are using this platform, some of which are:</p>
+        <div class="row">
+            {% for practice in practices %}
+                <div class="col-3" style="
+                background: #ffffff;
+                padding: 10px 20px;
+                border: 1px solid #dddddd;
+                border-radius: 3px;
+                margin-bottom: 20px;">
+                    <h4>{{ practice.practice }}</h4>
+                    <address>{{practice.address}}</address>
+                </div>
+                <div class="col-1"></div>
+            {% endfor %}                
+        </div>
+    </div>
+{% endblock main_section%}

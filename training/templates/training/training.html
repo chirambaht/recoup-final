@@ -1,0 +1,176 @@
+{% extends 'training/base.html' %}
+{% load crispy_forms_tags %}
+{% block main_section%}
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="sun-tab" data-toggle="tab" href="#sun" role="tab" aria-controls="sun" aria-selected="true">Sunday</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="mon-tab" data-toggle="tab" href="#mon" role="tab" aria-controls="mon" aria-selected="false">Monday</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="tue-tab" data-toggle="tab" href="#tue" role="tab" aria-controls="tue" aria-selected="false">Tuesday</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="wed-tab" data-toggle="tab" href="#wed" role="tab" aria-controls="wed" aria-selected="false">Wednesday</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="thu-tab" data-toggle="tab" href="#thu" role="tab" aria-controls="thu" aria-selected="false">Thursday</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="fri-tab" data-toggle="tab" href="#fri" role="tab" aria-controls="fri" aria-selected="false">Friday</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="sat-tab" data-toggle="tab" href="#sat" role="tab" aria-controls="sat" aria-selected="false">Saturday</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="sun" role="tabpanel" aria-labelledby="sun-tab">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <!-- <legend class="border-bottom mb-4">Sunday</legend> -->
+                {{ form.sun | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Save Sunday</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="tab-pane fade" id="mon" role="tabpanel" aria-labelledby="mon-tab">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <!-- <legend class="border-bottom mb-4">Monday</legend> -->
+                {{ form.mon | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Save Monday</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="tab-pane fade" id="tue" role="tabpanel" aria-labelledby="tue-tab">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <!-- <legend class="border-bottom mb-4">Tuesday</legend> -->
+                {{ form.tue | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Save Tuesday</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="tab-pane fade" id="wed" role="tabpanel" aria-labelledby="wed-tab">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <!-- <legend class="border-bottom mb-4">Wednesday</legend> -->
+                {{ form.wed | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Save Wednesday</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="tab-pane fade" id="thu" role="tabpanel" aria-labelledby="thu-tab">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form.thu | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Save Thursday</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="tab-pane fade" id="fri" role="tabpanel" aria-labelledby="fri-tab">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form.fri | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Save Friday</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="tab-pane fade" id="sat" role="tabpanel" aria-labelledby="sat-tab">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form.sat | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Save Saturday</button>
+            </div>
+        </form>
+    </div>
+</div>
+<p class="alert alert-info">
+    NB: For the url section, please set it to the Youtube video id. <br>
+    e.g. for https://www.youtube.com/watch?v=<u>qmxoGYCFruM</u>, id = <strong>qmxoGYCFruM</strong>
+</p>
+{% endblock main_section%}
+
+{% block side %}
+<div style="background: #ffffff;
+padding: 10px 20px;
+border: 1px solid #dddddd;
+border-radius: 3px;
+margin-bottom: 20px;">
+    <h3>{{ day|date:"l" }} {{day}}</h3>
+    <div>
+        <p>Currently you are <strong>{{ mode }}</strong></p>
+        <div class="today">
+            <h4>Today, you need to:</h4>
+            {% if weekday == 4 %}
+            <dl>
+                <dt>{{ fri }}</dt>
+                <dd>{{ fri_d }} <br>
+                    <a href="{% url 'clip' fri_v %}">Watch today's video</a>
+                </dd>
+
+            </dl>
+            {% elif weekday == 5 %}
+            <dl>
+                <dt>{{ sat }}</dt>
+                <dd>{{ sat_d }}<br> <a href="{% url 'clip' sat_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 6 %}
+            <dl>
+                <dt>{{ sun }}</dt>
+                <dd>{{ sun_d }}<br> <a href="{% url 'clip' sun_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 0 %}
+            <dl>
+                <dt>{{ mon }}</dt>
+                <dd>{{ mon_d }}<br> <a href="{% url 'clip' mon_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 1 %}
+            <dl>
+                <dt>{{ tue }}</dt>
+                <dd>{{ tue_d }}<br> <a href="{% url 'clip' tue_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 2 %}
+            <dl>
+                <dt>{{ wed }}</dt>
+                <dd>{{ wed_d }}<br> <a href="{% url 'clip' wed_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 3 %}
+            <dl>
+                <dt>{{ thu }}</dt>
+                <dd>{{ thu_d }}<br> <a href="{% url 'clip' thu_v %}">Watch today's video</a></dd>
+            </dl>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock side %}

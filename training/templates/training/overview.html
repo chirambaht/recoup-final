@@ -1,0 +1,104 @@
+{% extends "training/base.html" %}
+{% load crispy_forms_tags %}
+{% block main_section %}
+
+<div style="background: #ffffff;
+padding: 10px 20px;
+border: 1px solid #dddddd;
+border-radius: 3px;
+margin-bottom: 20px;">
+    <ul class="nav nav-tabs mb-3" id="tabs-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="tabs-home-tab" data-toggle="tab" href="#tabs-home" role="tab" aria-controls="tabs-home" aria-selected="true">Current Details</a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tabs-profile-tab" data-toggle="tab" href="#tabs-profile" role="tab" aria-controls="tabs-profile" aria-selected="false">Edit</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="tabs-tabContent">
+        <div class="tab-pane fade show active" id="tabs-home" role="tabpanel" aria-labelledby="tabs-home-tab">
+            <div class="media">
+                <img class="align-self-center mr-3" src="{{ user.athelete.profile_pic.url }}" width="200" height="200">
+                <div class="media-body">
+                    <h2 class="account-heading">{{ user.username }}</h2>
+                    <p class="text-secondary">Name: {{ user.get_full_name }} {{ user.surname }}</p>
+                    <p class="text-secondary">Email: {{ user.email }}</p>
+                    <p class="text-secondary">Contact Number: {{ user.athelete.contact_number }}</p>
+                    <p class="text-secondary">Premium: {{ user.athelete.paid }}</p>
+                    <p class="text-secondary">Linked Practice: {{ user.athelete.practice }}</p>
+                    <p class="text-secondary">Linked Trainer: {{ user.athelete.practice }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="tabs-profile" role="tabpanel" aria-labelledby="tabs-profile-tab">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Edit your profile</legend>
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock main_section %}
+{% block side %}
+<div style="background: #ffffff;
+padding: 10px 20px;
+border: 1px solid #dddddd;
+border-radius: 3px;
+margin-bottom: 20px;">
+    <h3>{{ day|date:"l" }} {{day}}</h3>
+    <div>
+        <p>Currently you are <strong>{{ mode }}</strong></p>
+        <div class="today">
+            <h4>Today, you need to:</h4>
+            {% if weekday == 4 %}
+            <dl>
+                <dt>{{ fri }}</dt>
+                <dd>{{ fri_d }} <br>
+                    <a href="{% url 'clip' fri_v %}">Watch today's video</a>
+                </dd>
+
+            </dl>
+            {% elif weekday == 5 %}
+            <dl>
+                <dt>{{ sat }}</dt>
+                <dd>{{ sat_d }}<br> <a href="{% url 'clip' sat_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 6 %}
+            <dl>
+                <dt>{{ sun }}</dt>
+                <dd>{{ sun_d }}<br> <a href="{% url 'clip' sun_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 0 %}
+            <dl>
+                <dt>{{ mon }}</dt>
+                <dd>{{ mon_d }}<br> <a href="{% url 'clip' mon_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 1 %}
+            <dl>
+                <dt>{{ tue }}</dt>
+                <dd>{{ tue_d }}<br> <a href="{% url 'clip' tue_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 2 %}
+            <dl>
+                <dt>{{ wed }}</dt>
+                <dd>{{ wed_d }}<br> <a href="{% url 'clip' wed_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 3 %}
+            <dl>
+                <dt>{{ thu }}</dt>
+                <dd>{{ thu_d }}<br> <a href="{% url 'clip' thu_v %}">Watch today's video</a></dd>
+            </dl>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock side %}

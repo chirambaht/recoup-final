@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block main_section%}
+<div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/8sX8HTWwTes" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<hr>
+<div class="row mt-6">
+    <div class="col-8">
+
+        <h2>In a nutshell</h2>
+        <blockquote class="blockquote">
+            <p>
+                <strong>Recoup</strong> is a web application used to allow you to interact with medical practices and with trainiers from all over the world.
+            </p>
+        </blockquote>
+        <p>It allows you to also look up videos from an extesnsive database that has information on all sorts of injuries as well as training videos to help heal as well as prevent injuries during normal excercise. </p>
+        <p>
+            There are 2 plans, paid and free. The free plan allows you to look through available videos that relate to their injuries as well as make a custom plan which they can stick to on their own. The paid plan allows for you to free subscribe to a practice that you are working with and get them to update your training plans. It also allows for a trainer to be hired to help with your training plans and recovery.
+        </p>
+        <h2>Why recoup</h2>
+        <p>By choosing Recoup, you are supporting trainers and practices that have been severly impacted by the Corona Virus when subscribe to their services. This application serves to extend their reach to people they would have never met. Further more, it allows you the user to access world class trainers and medical practices as well as their reccommended routines and training plans.</p>
+        <p>Another reason to choose Recoup is because it helps you not need to make visits to hospitals or clinics, allowing for resources to be more adequatly allocated for Covid-19 patients. This in turn reduces your own chances of contracting the disease by staying socially distant</p>
+    </div>
+    <div class="col-4 mt-6">
+        <img src="{% static 'dashboard/phys.jpg'%}" alt="" class="rounded img-fluid">
+    </div>
+</div>
+{% endblock main_section%}

@@ -1,0 +1,76 @@
+{% extends 'training/base.html' %}
+
+{% block main_section%}
+<h2>Get in touch with a medical practice today!</h2>
+<p>Feel free to contact any of the medical pactices that are shown below. They are fully compatible with our system. They also have content uploaded onto the system as well.</p>
+{% for practice in practices %}
+    <div style="background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;">
+        <h3>{{ practice.practice }}</h3>
+        <p>
+            Call in: <a href="tel:{{practice.contact_number}}"><strong>{{ practice.contact_number }} </strong></a><br>
+            Email: <a href="mailto:{{ practice.contact_email }}"><strong>{{ practice.contact_email }}</strong></a> <br>
+            Address: <strong>{{ practice.address }}</strong>
+        </p>
+    </div>
+{% endfor %}
+{% endblock main_section%}
+
+{% block side %}
+<div style="background: #ffffff;
+padding: 10px 20px;
+border: 1px solid #dddddd;
+border-radius: 3px;
+margin-bottom: 20px;">
+    <h3>{{ day|date:"l" }} {{day}}</h3>
+    <div>
+        <p>Currently you are <strong>{{ mode }}</strong></p>
+        <div class="today">
+            <h4>Today, you need to:</h4>
+            {% if weekday == 4 %}
+            <dl>
+                <dt>{{ fri }}</dt>
+                <dd>{{ fri_d }} <br>
+                    <a href="{% url 'clip' fri_v %}">Watch today's video</a>
+                </dd>
+
+            </dl>
+            {% elif weekday == 5 %}
+            <dl>
+                <dt>{{ sat }}</dt>
+                <dd>{{ sat_d }}<br> <a href="{% url 'clip' sat_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 6 %}
+            <dl>
+                <dt>{{ sun }}</dt>
+                <dd>{{ sun_d }}<br> <a href="{% url 'clip' sun_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 0 %}
+            <dl>
+                <dt>{{ mon }}</dt>
+                <dd>{{ mon_d }}<br> <a href="{% url 'clip' mon_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 1 %}
+            <dl>
+                <dt>{{ tue }}</dt>
+                <dd>{{ tue_d }}<br> <a href="{% url 'clip' tue_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 2 %}
+            <dl>
+                <dt>{{ wed }}</dt>
+                <dd>{{ wed_d }}<br> <a href="{% url 'clip' wed_v %}">Watch today's video</a></dd>
+            </dl>
+            {% elif weekday == 3 %}
+            <dl>
+                <dt>{{ thu }}</dt>
+                <dd>{{ thu_d }}<br> <a href="{% url 'clip' thu_v %}">Watch today's video</a></dd>
+            </dl>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock side %}

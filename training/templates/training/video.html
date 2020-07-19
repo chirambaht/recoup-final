@@ -1,0 +1,23 @@
+{% extends 'training/base.html' %}
+{% load static %}
+{% block head_stuff %}
+{% endblock head_stuff %}
+
+{% block main_section%}
+<div class="container dad">
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ link }}?controls=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    {% if not personal%}
+    <div class="">
+        <p><h4>{{ video_title }}</h4>Presented by <strong>{{ presenter_name }}</strong> from <strong>{{ practice_name }}</strong></p>
+    </div>
+    {% endif %}
+    <hr>
+    <div>
+        <p class="description">
+            {{ description }}
+        </p>
+    </div>
+
+    {% endblock main_section%}

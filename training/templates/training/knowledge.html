@@ -1,0 +1,32 @@
+{% extends 'training/base.html' %}
+
+{% block main_section%}
+<form action="." method="GET">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="e.g. knee" aria-label="kb_query" name="query" aria-describedby="button-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+        </div>
+    </div>
+</form>
+
+
+{% for item in items %}
+<div class="media position-relative rounded" style="background: #ffffff;
+padding: 10px 20px;
+border: 1px solid #dddddd;
+border-radius: 3px;
+margin-bottom: 20px;">
+    <img src="/media/{{ item.thumbnail }}" alt="" class="align-self-center mr-3 rounded">
+    <div class="media-body">
+        <h4>{{ item.title }}</h4>
+        <a class="stretched-link" href="{% url 'clip' item.url %}"></a>
+        <p>
+            Practice: <strong>{{ item.practice }}</strong> <br>
+            Focus Areas: <strong>{{ item.Focus_Area }}</strong> <br>
+        </p>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock main_section%}
